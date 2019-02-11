@@ -228,10 +228,11 @@ void Test::MouseMove(const b2Vec2& p)
 	{
 		if ((p - m_upMousePos).Length() > 3.0f)
 		{
-			for (int i = 0; i < 100; ++i)
-			{
-				createBody(p + b2Vec2(0.1f * i,0.0f), m_upMousePos + b2Vec2(0.1f * i, 0.0f));
-			}
+			//for (int i = 0; i < 50; ++i)
+			//{
+			//	createBody(p + b2Vec2(0.25f * i,0.0f), m_upMousePos + b2Vec2(0.25f * i, 0.0f));
+			//}
+			createBody(p, m_upMousePos);
 			m_upMousePos = p;
 		}
 	}

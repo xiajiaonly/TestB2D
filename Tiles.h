@@ -45,18 +45,23 @@ public:
 			int32 M = 10;
 			b2Vec2 position;
 			position.y = 0.0f;
-			for (int32 j = 0; j < M; ++j)
+			//for (int32 j = 0; j < M; ++j)
+			//{
+			//	position.x = -N * a;
+			//	for (int32 i = 0; i < N; ++i)
+			//	{
+			//		b2PolygonShape shape;
+			//		shape.SetAsBox(a, a, position, 0.0f);
+			//		ground->CreateFixture(&shape, 0.0f);
+			//		++m_fixtureCount;
+			//		position.x += 2.0f * a;
+			//	}
+			//	position.y -= 2.0f * a;
+			//}
 			{
-				position.x = -N * a;
-				for (int32 i = 0; i < N; ++i)
-				{
-					b2PolygonShape shape;
-					shape.SetAsBox(a, a, position, 0.0f);
-					ground->CreateFixture(&shape, 0.0f);
-					++m_fixtureCount;
-					position.x += 2.0f * a;
-				}
-				position.y -= 2.0f * a;
+				b2PolygonShape shape;
+				shape.SetAsBox(200, 10, b2Vec2(0.0f,-10.0f), 0.0f);
+				ground->CreateFixture(&shape, 0.0f);
 			}
 #else
 			int32 N = 200;
@@ -80,8 +85,10 @@ public:
 
 		{
 			float32 a = 0.5f;
-			b2PolygonShape shape;
-			shape.SetAsBox(a, a);
+			//b2PolygonShape shape;
+			//shape.SetAsBox(a, a);
+			b2CircleShape shape;
+			shape.m_radius = a;
 
 			b2Vec2 x(-7.0f, 0.75f);
 			b2Vec2 y;
@@ -137,8 +144,8 @@ public:
 
 		Test::Step(settings);
 
-		g_debugDraw.DrawString(5, m_textLine, "create time = %6.2f ms, fixture count = %d",
-			m_createTime, m_fixtureCount);
+		g_debugDraw.DrawString(5, m_textLine, "create time = %6.2f ms, fixture count = %d, body sum = %d",
+			m_createTime, m_fixtureCount, m_bodys.size() - (e_count + 1) * e_count / 2);
 		m_textLine += DRAW_STRING_NEW_LINE;
 
 		//b2DynamicTree* tree = &m_world->m_contactManager.m_broadPhase.m_tree;
